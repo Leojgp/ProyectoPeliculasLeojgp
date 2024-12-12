@@ -5,11 +5,12 @@ import { Movie } from '../config/entities/Movie'
 interface Movies  {
   movies: Movie[] | undefined;
   height: number;
+  backgroundColor: string;
 }
 
-export default function Slider({ movies, height }: Movies) {
+export default function Slider({ movies, height, backgroundColor }: Movies) {
   return (
-    <View>
+    <View style={[{ backgroundColor: backgroundColor, height: height }]}>
       <ScrollView style = {styles.contenedor} horizontal={true}>
         {movies?.map((item) => (
           <Image style = {styles.imagen} key = {item.id}
@@ -31,7 +32,6 @@ const styles = StyleSheet.create({
   }, 
   imagen: {
     width: 200,
-    //height: 200,
     margin: 1
   }
 })

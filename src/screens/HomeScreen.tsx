@@ -8,17 +8,16 @@ export default function HomeScreen() {
     return (
         <View>
             <Text>HomeScreen</Text>
-            <Slider movies={nowPlaying?.movies} height={100} />
+            <Slider movies={nowPlaying?.movies} height={300} backgroundColor="lightyellow"/>
             <Button
             title='Siguiente'
             onPress={()=>{
                 if (nowPlaying) {
-                    // Crear un nuevo objeto sin mutar el original
                     const newNowPlaying = {
                         ...nowPlaying,
                         page: nowPlaying.page + 1,
                     };
-                    setNowPlaying(newNowPlaying); // Actualizar el estado con el nuevo objeto
+                    setNowPlaying(newNowPlaying);
                 }
             }}
             />

@@ -12,7 +12,6 @@ export const useMovies = () => {
     const loadMovies = async () => {
         const movies = await FilmAdapter.getMovies({...nowPlaying, route : FilmAdapter.ROUTES.nowPlaying});
         if (movies != null) {
-            console.log(movies);
             setNowPlaying(movies);
             setLoading(true);
         }
