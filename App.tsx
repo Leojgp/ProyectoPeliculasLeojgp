@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
-import SettingsScreen from './src/screens/SettingsScreen';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import SecondScreen from './src/screens/SecondScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +23,7 @@ export default function App() {
             case "Home":
               if (focused) return  ( <Ionicons name="film" size={size} color={color} /> )
                 else return ( <Ionicons name="film-outline" size={size} color={color} /> )
-            case "Settings":
+            case "SecondScreen":
               if (focused) return ( <Ionicons name="build" size={size} color={color} /> )
                 else return ( <Ionicons name="build-outline" size={size} color={color} /> )
           }
@@ -36,7 +36,7 @@ export default function App() {
       
       >
         <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Películas' }}/>
-        <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: 'Configuración' }}/>
+        <Tab.Screen name="SecondScreen" component={SecondScreen} options={{ title: 'Configuración' }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
