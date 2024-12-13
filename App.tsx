@@ -7,12 +7,14 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SecondScreen from './src/screens/SecondScreen';
+import { ThemeProvider } from './src/context/ThemeContext';
 
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    <ThemeProvider>
     <NavigationContainer>
       <Tab.Navigator
       
@@ -39,6 +41,7 @@ export default function App() {
         <Tab.Screen name="SecondScreen" component={SecondScreen} options={{ title: 'Configuración' }}/>
       </Tab.Navigator>
     </NavigationContainer>
+    </ThemeProvider>
   );
 }
 
