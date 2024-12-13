@@ -1,27 +1,32 @@
-import { useEffect, useState } from "react"
-import { Movie } from "../config/entities/Movie";
+import { useEffect, useState } from "react";
 import { FilmAdapter } from "../adapter/FilmAdapter";
 import ResultMovie from "../config/entities/ResultMovie";
 
 export const useMovies = () => {
-
-    const [nowPlaying, setNowPlaying] = useState<ResultMovie| null>(null);
-
-    const [loading, setLoading] =useState(false);
+    const [nowPlaying, setNowPlaying] = useState<ResultMovie | null>(null);
+    const [loading, setLoading] = useState(false);
+    // He creado un estado para la página
+    const [page, setPage] = useState(1); 
 
     const loadMovies = async () => {
-        const movies = await FilmAdapter.getMovies({...nowPlaying, route : FilmAdapter.ROUTES.nowPlaying});
-        if (movies != null) {
-            setNowPlaying(movies);
-            setLoading(true);
-        }
-    }
+        if (loading) return; 
+        setLoading(true);
 
-    useEffect(() => {
+        const movies = await FilmAdapter.getMovies({ page, route: FilmAdapter.ROUTES.nowPlaying });
+        if (movies != null) {
+            setNowPlaying((prev) => ({
+                ...movies,
+                // Junto las películas de la página anterior y las junto con las nuevas
+                movies: [...(prev?.movies || []), ...movies.movies],
+            }));
+        }
+
+        setLoading(false); 
+    };
+        useEffect(() => {
         loadMovies();
-      }, [nowPlaying?.page])
-    
+    }, [page]); 
     return {
-        nowPlaying, loading, setNowPlaying
-    }
+        nowPlaying,loading,setPage, 
+    };
 }
